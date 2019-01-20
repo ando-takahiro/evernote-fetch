@@ -10,6 +10,7 @@ parser.add_argument('--token', help='developer token(http://dev.evernote.com/doc
 parser.add_argument('--notebook', help='notebook name to fetch', required=True)
 parser.add_argument('--max-notes', help='max notes to fetch', default=1000)
 parser.add_argument('--out', help='output directory', default='.')
+parser.add_argument('--production', help='is production?', action='store_true')
 
 args = parser.parse_args()
 
@@ -46,7 +47,7 @@ auth_token = args.token
 # To access production (International) service, set both sandbox and china to False
 # To access production (China) service, set sandbox to False and china to True
 
-sandbox=True
+sandbox=not args.production
 china=False
 
 client = EvernoteClient(token=auth_token, sandbox=sandbox,china=china)
